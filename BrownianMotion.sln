@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrownianMotionWPF", "BrownianMotion\BrownianMotionWPF.csproj", "{5692A44B-7FA3-42F9-8ADB-A3AB48273192}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelEngine", "ParallelEngine\ParallelEngine.csproj", "{F8B27ADD-321D-4309-B1F0-E960433D9489}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLI", "CLI\CLI.csproj", "{E9CB5C46-AC11-4E41-BC08-06E071616360}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5692A44B-7FA3-42F9-8ADB-A3AB48273192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5692A44B-7FA3-42F9-8ADB-A3AB48273192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5692A44B-7FA3-42F9-8ADB-A3AB48273192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5692A44B-7FA3-42F9-8ADB-A3AB48273192}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8B27ADD-321D-4309-B1F0-E960433D9489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8B27ADD-321D-4309-B1F0-E960433D9489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8B27ADD-321D-4309-B1F0-E960433D9489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8B27ADD-321D-4309-B1F0-E960433D9489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9CB5C46-AC11-4E41-BC08-06E071616360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9CB5C46-AC11-4E41-BC08-06E071616360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9CB5C46-AC11-4E41-BC08-06E071616360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9CB5C46-AC11-4E41-BC08-06E071616360}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
