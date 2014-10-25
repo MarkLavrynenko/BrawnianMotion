@@ -31,7 +31,7 @@ namespace ParallelEngine
                 var particle = new Particle { X = 0, Y = 0 };
                 Map.AddParticle(particle);
                 //TODO: move props to config
-                var worker = new Worker(_locker, Barrier, Randomizer, 0.5, 0.5)
+                var worker = new Worker(_locker, Barrier, Randomizer, 0.4, 0.5, 0.4, 0.5)
                 {
                     Number = i,
                     Particle = particle

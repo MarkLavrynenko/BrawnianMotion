@@ -9,14 +9,16 @@ namespace ParallelEngine
 {
     internal class Worker
     {
-        public Worker(object locker, Barrier barrier, Random rnd, double pV, double pH)
+        public Worker(object locker, Barrier barrier, Random rnd, double pv1, double pv2, double ph1, double ph2)
         {
             Locker = locker;
             Barrier = barrier;
             Thread = new Thread(StartMoving) { IsBackground = true };
             Random = rnd;
-            PV = pV;
-            PH = pH;
+            PV1 = pv1;
+            PV2 = pv2;
+            PH1 = ph1;
+            PH2 = ph2;
         }      
   
         public Particle Particle { get; set; }
@@ -24,8 +26,10 @@ namespace ParallelEngine
         private object Locker { get; set; }
         private Barrier Barrier { get; set; }
         private Random Random { get; set; }
-        private double PV { get; set; }
-        private double PH { get; set; }
+        private double PV1 { get; set; }
+        private double PH1 { get; set; }
+        private double PV2 { get; set; }
+        private double PH2 { get; set; }
 
         private void StartMoving(object obj)
         {
@@ -38,8 +42,8 @@ namespace ParallelEngine
                     numberH = Random.NextDouble();
                     numberV = Random.NextDouble();
                 }
-                int dx = (numberV <= PV) ? -1 : 1,
-                    dy = (numberH <= PH) ? -1 : 1;
+                int dx = (numberV <= PV1) ? -1 : (numberV <= PV2 ? 0 : 1),
+                    dy = (numberH <= PH1) ? -1 : (numberH <= PH2 ? 0 : 1);
                 Particle.Move(dx, dy);
                 Barrier.SignalAndWait();
             }
