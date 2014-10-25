@@ -9,13 +9,12 @@ namespace ParallelEngine
 {
     public class Worker
     {
-        public Worker(object locker, Barrier barrier, Random rnd, Particle particle, double pV, double pH)
+        public Worker(object locker, Barrier barrier, Random rnd, double pV, double pH)
         {
             Locker = locker;
             Barrier = barrier;
             Thread = new Thread(StartMoving);
             Random = rnd;
-            Particle = particle;
             PV = pV;
             PH = pH;
         }      
@@ -33,27 +32,17 @@ namespace ParallelEngine
             Thread.Name = String.Format("Worker number {0}", Number);
             while (true)
             {
+                double numberH, numberV;
                 lock (Locker)
                 {
-                    double numberH = Random.NextDouble(),
-                           numberV = Random.NextDouble();
-                    if (numberV <= PV)
-                        Particle.Move(-1, 0);
-                    else
-                        Particle.Move(+1, 0);
-
-                    if (numberH <= PH)
-                        Particle.Move(0, -1);
-                    else
-                        Particle.Move(0, +1);
+                    numberH = Random.NextDouble();
+                    numberV = Random.NextDouble();
                 }
-               Barrier.SignalAndWait();
+                int dx = (numberV <= PV) ? -1 : 1,
+                    dy = (numberH <= PH) ? -1 : 1;
+                Particle.Move(dx, dy);
+                Barrier.SignalAndWait();
             }
-        }
-
-        internal void Stop()
-        {
-            throw new NotImplementedException();
         }
 
         internal void Start()
@@ -62,5 +51,10 @@ namespace ParallelEngine
         }
 
         public int Number { get; set; }
+
+        internal void Stop()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

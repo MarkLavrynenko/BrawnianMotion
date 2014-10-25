@@ -20,7 +20,7 @@ namespace ParallelEngine
         public Manager(int width, int height, int threads, int drawInterval)
         {
             _startTime = DateTime.Now;
-            _drawInterval = drawInterval;
+            _drawInterval = drawInterval;            
             Map = new Map(width, height);
             Randomizer = new Random(69);
             Barrier = new Barrier(threads, AfterStep);
@@ -31,7 +31,11 @@ namespace ParallelEngine
                 var particle = new Particle { X = 0, Y = 0 };
                 Map.AddParticle(particle);
                 //TODO: move props to config
-                var worker = new Worker(_locker, Barrier, Randomizer, particle, 0.5, 0.5) { Number = i } ; 
+                var worker = new Worker(_locker, Barrier, Randomizer, 0.5, 0.5)
+                {
+                    Number = i,
+                    Particle = particle
+                };
                 Workers.Add(worker);
             }
         }
@@ -58,7 +62,7 @@ namespace ParallelEngine
             //TODO: do we need _locker in timer callback???
             _timer = new Timer(Tick, _locker, 0, _drawInterval);
             for (int i = 0; i < Workers.Count; ++i)
-                Workers[i].Start();            
+                Workers[i].Start();
         }
 
         private void Tick(object state)

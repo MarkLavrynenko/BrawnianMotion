@@ -17,6 +17,14 @@ namespace ParallelEngine
         }
         public int Width { get; set; }
         public int Height { get; set; }
+        public int NumberOfParticles
+        {
+            get
+            {
+                return Width * Height;
+            }
+        }
+        public object Locker { get; set; }
         public int[,] Count { get; set; }
 
         public void AddParticle(Particle particle){
