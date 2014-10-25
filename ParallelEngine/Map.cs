@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ParallelEngine
 {
-    public class Map
+    public class Map : ICloneable
     {
         public Map(int width, int height)
         {
@@ -32,7 +32,8 @@ namespace ParallelEngine
             Count[particle.X,particle.Y]++;
         }
 
-        internal int Validate(object _locker, int expected)
+        //not thread-safe, called only in PostPhraseAction
+        internal int Validate(int expected)
         {
             int sum = 0;
             for (int i = 0; i < Width; ++i)
@@ -56,6 +57,13 @@ namespace ParallelEngine
                     Console.Write("{0,2} ", Count[i,j]);
                 Console.WriteLine();
             }
+        }
+
+        public object Clone()
+        {
+            var map = new Map(Width, Height);
+            map.Count = (int[,])Count.Clone();
+            return map;
         }
     }
 }

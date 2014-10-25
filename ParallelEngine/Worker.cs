@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace ParallelEngine
 {
-    public class Worker
+    internal class Worker
     {
         public Worker(object locker, Barrier barrier, Random rnd, double pV, double pH)
         {
             Locker = locker;
             Barrier = barrier;
-            Thread = new Thread(StartMoving);
+            Thread = new Thread(StartMoving) { IsBackground = true };
             Random = rnd;
             PV = pV;
             PH = pH;
@@ -54,7 +54,7 @@ namespace ParallelEngine
 
         internal void Stop()
         {
-            throw new NotImplementedException();
+            Thread.Abort();
         }
     }
 }

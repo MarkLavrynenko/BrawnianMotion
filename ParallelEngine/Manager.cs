@@ -14,9 +14,9 @@ namespace ParallelEngine
         private int _threads;
         private Timer _timer;
         private DateTime _startTime;
-        private int _drawInterval;
-        
+        private int _drawInterval;        
         private volatile Boolean _needPrint;
+
         public Manager(int width, int height, int threads, int drawInterval)
         {
             _startTime = DateTime.Now;
@@ -39,21 +39,24 @@ namespace ParallelEngine
                 Workers.Add(worker);
             }
         }
-
         private void AfterStep(Barrier obj)
         {
             ++_moveCount;
             //Console.WriteLine("Finished move #" + _moveCount);
-            var sum = Map.Validate(_locker, _threads);
+            var sum = Map.Validate(_threads);
             if (_needPrint)
             {
                 _needPrint = false;
-                Map.PrintItself();
-                Console.WriteLine("Sum is {0}, Step is {1} in {2} seconds",sum, _moveCount, (DateTime.Now - _startTime).Seconds);
+                if (OnMapChanged != null)
+                    OnMapChanged(this, new MapChangedEventArgs((Map)Map.Clone()));
+                //Map.PrintItself();
+                //Console.WriteLine("Sum is {0}, Step is {1} in {2} seconds",sum, _moveCount, (DateTime.Now - _startTime).Seconds);
             }            
         }
+        public delegate void MapChangedHandler(Manager manager, MapChangedEventArgs args);
+        public event MapChangedHandler OnMapChanged;
         public Map Map { get; set; }
-        public List<Worker> Workers { get; set; }
+        internal List<Worker> Workers { get; set; }
         private Barrier Barrier { get; set; }
         private Random Randomizer { get; set; }
 
